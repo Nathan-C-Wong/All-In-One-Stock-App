@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div id="form-area">
+        <h1>Stock Search</h1>
+        <form id="stock-form">
+            <label>Enter Stock Ticker Symbol</label>
+            <input type="text" name="stock-ticker" id="input-stock" required>
+            <br><br>
+            <button type="submit" class="btn" id="search">Search</button>
+            <button type="button" class="btn" id="clear">Clear</button>
+        </form>
+    </div>
+
+    <hr class="line">
+
+    <!-- Error message is hidden until necessary -->
+    <p id="error-message">Error: No record has been found, please enter a valid symbol.</p>
+    <p id="cache-statement"> Retrieved From Cache</p>
+
+    <!--Hidden until valid search is provided-->
+    <div id="options">
+        <span class="query-tab" id="outlook">Company Outlook</span>
+        <span class="query-tab" id="summary">Stock Summary</span>
+        <span class="query-tab" id="search-history">Search History</span>
+    </div>
+
+    <br> 
+
+    <div id="output-area">
+        <!-- Company outlook table -->
+        <table id="company-outlook" style="display:none;">
+            <tr>
+                <td class="row-name">Company Name</td>
+                <td class="row-data" id="name"></td>
+            </tr>
+            <tr>
+                <td class="row-name">Stock Ticker Symbol</td>
+                <td class="row-data" id="out-symbol"></td>
+            </tr>
+            <tr>
+                <td class="row-name">Exchange Code</td>
+                <td class="row-data" id="exchange-code"></td>
+            </tr>
+            <tr>
+                <td class="row-name">Start Date</td>
+                <td class="row-data" id="start-date"></td>
+            </tr>
+            <tr>
+                <td class="row-name">Description</td>
+                <td class="row-data" id="description"></td>
+            </tr>
+        </table>
+
+        <!-- Stock summary table -->
+        <table id="stock-summary"  style="display:none;">
+            <tr>
+                <td class="row-name">Stock Ticker Symbol</td>
+                <td class="row-data" id="symbol"></td>
+            </tr>
+            <tr>
+                <td class="row-name">Trading Day</td>
+                <td class="row-data" id="trading-day"></td>
+            </tr>
+            <tr>
+                <td class="row-name">Previous Closing Price</td>
+                <td class="row-data" id="prev-closing"></td>
+            </tr>
+            <tr>
+                <td class="row-name">Opening Price</td>
+                <td class="row-data" id="open-price"></td>
+            </tr>
+            <tr>
+                <td class="row-name">High Price</td>
+                <td class="row-data" id="high-price"></td>
+            </tr>
+            <tr>
+                <td class="row-name">Low Price</td>
+                <td class="row-data" id="low-price"></td>
+            </tr>
+            <tr>
+                <td class="row-name">Last Price</td>
+                <td class="row-data" id="last-price"></td>
+            </tr>
+            <tr>
+                <td class="row-name">Change</td>
+                <td class="row-data" id="change"></td>
+            </tr>
+            <tr>
+                <td class="row-name">Change Percent</td>
+                <td class="row-data" id="change-percent"></td>
+            </tr>
+            <tr>
+                <td class="row-name">Number of Shares Traded</td>
+                <td class="row-data" id="shares-traded"></td>
+            </tr>
+        </table>
+        
+        <!-- History table -->
+        <table id="my-history" style="display:none;">
+            <tr>
+                <th class="time-header"></th>
+                <th class="time-header">Ticker</th>
+                <th class="time-header">Timestamp</th>
+            </tr>
+            <tr>
+                <td class="row-name">Search #1 (Most Recent)</td>
+                <td class="row-data" id="history-1"></td>
+                <td class="row-timestamp" id="timestamp-1"></td>
+            </tr>
+            <tr>
+                <td class="row-name">Search #2</td>
+                <td class="row-data" id="history-2"></td>
+                <td class="row-timestamp" id="timestamp-2"></td>
+            </tr>
+            <tr>
+                <td class="row-name">Search #3</td>
+                <td class="row-data" id="history-3"></td>
+                <td class="row-timestamp" id="timestamp-3"></td>
+            </tr>
+            <tr>
+                <td class="row-name">Search #4</td>
+                <td class="row-data" id="history-4"></td>
+                <td class="row-timestamp" id="timestamp-4"></td>
+            </tr>
+            <tr>
+                <td class="row-name">Search #5</td>
+                <td class="row-data" id="history-5"></td>
+                <td class="row-timestamp" id="timestamp-5"></td>
+            </tr>
+            <tr>
+                <td class="row-name">Search #6</td>
+                <td class="row-data" id="history-6"></td>
+                <td class="row-timestamp" id="timestamp-6"></td>
+            </tr>
+            <tr>
+                <td class="row-name">Search #7</td>
+                <td class="row-data" id="history-7"></td>
+                <td class="row-timestamp" id="timestamp-7"></td>
+            </tr>
+            <tr>
+                <td class="row-name">Search #8</td>
+                <td class="row-data" id="history-8"></td>
+                <td class="row-timestamp" id="timestamp-8"></td>
+            </tr>
+            <tr>
+                <td class="row-name">Search #9</td>
+                <td class="row-data" id="history-9"></td>
+                <td class="row-timestamp" id="timestamp-9"></td>
+            </tr>
+            <tr>
+                <td class="row-name">Search #10</td>
+                <td class="row-data" id="history-10"></td>
+                <td class="row-timestamp" id="timestamp-10"></td>
+            </tr>
+        </table>
+        
+        
+    </div>
+    <script>
+        const greenArrowUrl = "{{ url_for('static', filename='GreenArrowUp.png') }}";
+        const redArrowUrl = "{{ url_for('static', filename='RedArrowDown.png') }}";
+    </script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

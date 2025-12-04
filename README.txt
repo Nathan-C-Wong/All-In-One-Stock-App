@@ -1,4 +1,4 @@
-Hw6 Link: http://3.143.173.179:8000/
+# How to run on local
 
 cd .\Tiingo_Webapp\
 cd venv
